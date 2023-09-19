@@ -53,7 +53,7 @@ class Board:
             out += 3 ** i * self[rot[i]]
         return out
 
-    def as_latex(self):
+    def as_latex(self, iter_num):
         out = "\\begin{tikzpicture}\n"
         out += "\\clip (3.75mm,-1mm) rectangle (40.25mm,25mm);\n"
         out += "\\draw[gray] (5mm,5mm) -- (39mm,5mm);\n"
@@ -61,15 +61,18 @@ class Board:
         out += "\\draw[gray] (5mm,0mm) -- (5mm,24mm);\n"
         out += "\\draw[gray] (39mm,0mm) -- (39mm,24mm);\n"
 
-        out += "\\draw (16mm,10mm) -- (28mm,10mm);\n"
-        out += "\\draw (16mm,14mm) -- (28mm,14mm);\n"
-        out += "\\draw (20mm,6mm) -- (20mm,18mm);\n"
-        out += "\\draw (24mm,6mm) -- (24mm,18mm);\n"
+        out += "\\draw (7mm,10mm) -- (19mm,10mm);\n"
+        out += "\\draw (7mm,14mm) -- (19mm,14mm);\n"
+        out += "\\draw (11mm,6mm) -- (11mm,18mm);\n"
+        out += "\\draw (15mm,6mm) -- (15mm,18mm);\n"
+
+        out += "\\node at (32mm, 12mm) "
+        out += "{" + f"{iter_num}" + "};\n"
 
         for i, c in enumerate([
-            (16, 6), (20, 6), (24, 6),
-            (16, 10), (20, 10), (24, 10),
-            (16, 14), (20, 14), (24, 14)
+            (7, 6), (11, 6), (15, 6),
+            (7, 10), (11, 10), (15, 10),
+            (7, 14), (11, 14), (15, 14)
         ]):
             if self[i] == 1:
                 # o

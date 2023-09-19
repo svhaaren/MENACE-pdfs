@@ -1,4 +1,3 @@
-import os
 from itertools import permutations
 from menace import Board
 from latex import preamb, postamb
@@ -42,7 +41,19 @@ assert sum([len(p) for p in positions]) == 304
 for i, boards in enumerate(positions):
     latex = preamb
     for j, board in enumerate(boards):
-        latex += board.as_latex()
+        # HACK FIX: hard-code the numbers to avoid rewriting the scritps
+        if i == 0:
+            iter_num = j + 1
+        elif i == 1:
+            iter_num = 1 + (j + 1)
+        elif i == 2:
+            iter_num = 13 + (j + 1)
+        elif i == 3:
+            iter_num = 121 + (j + 1)
+        else:
+            raise ValueError("The number of possible sets is between 0, 1, 2, and 3")
+
+        latex += board.as_latex(iter_num=iter_num)
         latex += "\n"
         if (j + 1) % 5 == 0:
             latex += "\n\\noindent"
@@ -50,5 +61,8 @@ for i, boards in enumerate(positions):
     print(latex)
     with open(f"output/boxes{i}.tex", "w") as f:
         f.write(latex)
-    assert os.system(
-        f"pdflatex -output-directory output output/boxes{i}.tex") == 0
+    
+    # NOTE: we don't use the code from below as pdflatex initialization wasn't working
+    # hence we convert tex files to pdf ourselves
+    # assert os.system(
+    #     f"pdflatex -output-directory output output/boxes{i}.tex") == 0
