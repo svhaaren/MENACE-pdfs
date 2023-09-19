@@ -53,7 +53,7 @@ class Board:
             out += 3 ** i * self[rot[i]]
         return out
 
-    def as_latex(self, iter_num):
+    def as_latex(self, iter_num=None):
         out = "\\begin{tikzpicture}\n"
         out += "\\clip (3.75mm,-1mm) rectangle (40.25mm,25mm);\n"
         out += "\\draw[gray] (5mm,5mm) -- (39mm,5mm);\n"
@@ -66,8 +66,9 @@ class Board:
         out += "\\draw (11mm,6mm) -- (11mm,18mm);\n"
         out += "\\draw (15mm,6mm) -- (15mm,18mm);\n"
 
-        out += "\\node at (32mm, 12mm) "
-        out += "{" + f"{iter_num}" + "};\n"
+        if iter_num is not None:
+            out += "\\node at (32mm, 12mm) "
+            out += "{" + f"{iter_num}" + "};\n"
 
         for i, c in enumerate([
             (7, 6), (11, 6), (15, 6),

@@ -53,7 +53,7 @@ for i, boards in enumerate(positions):
         else:
             raise ValueError("The number of possible sets is between 0, 1, 2, and 3")
 
-        latex += board.as_latex(iter_num=iter_num)
+        latex += board.as_latex(iter_num=None)
         latex += "\n"
         if (j + 1) % 5 == 0:
             latex += "\n\\noindent"
@@ -61,7 +61,7 @@ for i, boards in enumerate(positions):
     print(latex)
     with open(f"output/boxes{i}.tex", "w") as f:
         f.write(latex)
-    
+
     # NOTE: we don't use the code from below as pdflatex initialization wasn't working
     # hence we convert tex files to pdf ourselves
     # assert os.system(
